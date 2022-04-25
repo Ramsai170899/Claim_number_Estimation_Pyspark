@@ -1,0 +1,49 @@
+---
+title: "Estimation of number of claims using negative binomial distribution."
+author: "Ramsai Jagadish 20243"
+date: "30/08/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+CONTRACTS<- read.csv("CONTRACTS.csv")
+```
+
+```{r}
+names(CONTRACTS)
+```
+```{r}
+head(CONTRACTS)
+```
+
+
+```{r}
+CONTRACTS.f <- CONTRACTS
+CONTRACTS.f$DriverAge <- cut(CONTRACTS$DriverAge,c(17,22,26,42,74,Inf))
+CONTRACTS.f$CarAge <- cut(CONTRACTS$CarAge,c(0,15,Inf), include.lowest = TRUE)
+CONTRACTS.f$Density <- cut(CONTRACTS$Density , c(0,40,200,500,4500,Inf))
+CONTRACTS.f$BrandF <- factor(CONTRACTS.f$Brand == "Japanese (except Nissan) or Korean", labels=c("others","Japanese (except Nissan) or Korean"))
+CONTRACTS.f$powerF <- factor(1*(CONTRACTS.f$Power%in%letters[4:6]) + 2*(CONTRACTS.f$Power%in%letters[7:8]) , labels=c("other","DEF","GH"))
+```
+
+```{r}
+head(CONTRACTS.f)
+```
+```{r}
+levels(CONTRACTS.f$CarAge)
+```
+
+
+```{r}
+library(MASS)
+freg <- formula(ClaimNb ~ DriverAge + CarAge + Density + BrandF + powerF + Gas + offset(log(Exposure)))
+regnb2 <- glm.nb(freg,data = CONTRACTS.f)
+summary(regnb2)
+```
+
+
+

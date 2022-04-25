@@ -1,0 +1,59 @@
+---
+title: "CASinR"
+author: "Ramsai Jagadish 20243"
+date: "19/04/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+df <- read.csv("CASpreprocessed.csv")
+```
+
+```{r}
+names(df)
+```
+
+```{r}
+library(MASS)
+freg <- formula(seriousInjuryCount ~ roadCharacter+roadSurface+trafficSign+carStationWagon+cliffBank+debris+ditch+fence+guardRail+houseOrBuilding+motorcycle+NumberOfLanes+overBank+parkedVehicle+postOrPole+schoolBus+slipOrFlood+speedLimit+tree+urban+vanOrUtility+vehicle)
+```
+
+```{r}
+regp <- glm(freg, data =df, family = poisson(link="log"))
+summary(regp)
+```
+```{r}
+library(AER)
+dispersiontest(regp)
+```
+
+
+```{r}
+regnb2 <- glm.nb(freg,data = df)
+summary(regnb2)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
