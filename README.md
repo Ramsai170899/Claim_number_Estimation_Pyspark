@@ -12,3 +12,7 @@ Claim Count Estimation - Actuarial Data Science
 •	Comparison between Negative binomial Regression model and a sequential Artificial Neural Network model trained on Crash Analysis System(CAS) dataset. 
 
 •	Large Scale Predictions Scenario using pyspark API – 30Million+ predictions made in less than 1 and half minute.
+
+Paper Published on the Thesis in the International Journal(https://github.com/Ramsai170899/Claim_number_Estimation_Pyspark/blob/main/JETIR/JETIRpaper.pdf)
+
+Certification for the Paper and the Project.(https://github.com/Ramsai170899/Claim_number_Estimation_Pyspark/blob/main/JETIR/JETIR2206A01_Certificate.pdf)
